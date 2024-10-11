@@ -1,0 +1,88 @@
+<!-- https://burning-brushes.pl/tutoriale-javascriptjquery/prosta-galeria-na-javascript/
+https://kursjs.pl/kurs/super-podstawy/tablice#nowa_tablica
+https://zsobobowa.eu/pliki/program/js/l18.htm -->
+
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria</title>
+    <style type="text/css">
+        body {
+            text-align: center;
+            background-color: rgb(159, 178, 249);
+        }
+        img {
+            height: 400px;
+            width: 600px;
+            border: 5px rgb(255, 255, 255) solid;
+            border-radius: 15%;
+            transition: opacity 0.3s;
+        }
+        img:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+        button {
+            border: 5px rgb(255, 255, 255) solid;
+            width: 100px;
+            height: 60px;
+            border-radius: 10%;
+            background-color: white;
+            color: rgb(159, 178, 249);
+        }
+        h2 {
+            color: white;
+            font-size: 50px;
+            font-family:Verdana, Geneva, Tahoma, sans-serif
+        }
+    </style>
+</head>
+<body>
+    <h2>Górskie Krajobrazy</h2>
+    <div id="zdjecie"><img id="photo" src="./galeria/1.jpg"></div>
+    <button type="button" id="previous">Poprzednie</button>
+    <button type="button" id="next">Następne</button>
+    <script>
+        let id = 0;
+        const numberOfPhotos = 6;
+        let big = false;
+
+        document.getElementById("next").addEventListener("click", displayNextPhoto);
+        document.getElementById("previous").addEventListener("click", displayPreviousPhoto);
+        document.getElementById("photo").addEventListener("click", bigPhoto);
+
+        function displayNextPhoto() {
+            if (id < numberOfPhotos - 1) {
+                id++;
+            } else {
+                id = 0;
+            }
+            updatePhoto();
+        }
+
+        function displayPreviousPhoto() {
+            if (id > 0) {
+                id--;
+            } else {
+                id = numberOfPhotos - 1;
+            }
+            updatePhoto();
+        }
+
+        function updatePhoto() {
+            const photoElement = document.getElementById("photo");
+            photoElement.src = "./galeria/" + id + ".jpg";
+            photoElement.style.width = big ? "1000px" : "600px";
+            photoElement.style.height = big ? "600px" : "400px";
+        }
+
+        function bigPhoto() {
+            big = !big;
+            updatePhoto();
+        }
+    </script>
+</body>
+</html>
